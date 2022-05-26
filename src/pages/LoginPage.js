@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import Form from '../components/Form'
 import {ReactComponent as Logo} from '../assets/logo.svg';
 import LoginPageBgImage from '../assets/LoginPage.svg'

@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import{
     FormErrorMessage,
@@ -8,10 +8,15 @@ import{
     Button,
     Center
 } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom'
+
+import { Context } from '../context/AuthContext'
 
 const Form = () => {
 
+    const { authenticated, handleLogin } = useContext(Context)
     const [show, setShow] = useState(false)
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
@@ -39,7 +44,10 @@ const Form = () => {
     const onSubmit = (values) => {
         return new Promise((resolve)=>{
             setTimeout(()=>{
+                handleLogin();
                 alert(JSON.stringify(values));
+                console.log(`O valor de Authenticated - ${authenticated}`)  
+                navigate('/dashboard')              
                 resolve();
             },3000);
         });
