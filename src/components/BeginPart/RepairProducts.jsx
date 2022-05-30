@@ -73,8 +73,7 @@ const RepairProducts = () => {
                     letterSpacing={'0px'}
                     opacity={'1'}
                     fontSize={'16px'}
-                    lineHeight={'18px'} 
-                    
+                    lineHeight={'18px'}                     
                     mt={'2.5px'}
                     
                 >
