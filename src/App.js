@@ -1,4 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import theme from './theme'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -9,7 +10,7 @@ import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AuthProvider>
         <Router history={history}>
           <AllRoutes />

@@ -16,12 +16,24 @@ import {
   useColorModeValue,
   Stack,
   Container,
+  Heading,
 
 } from '@chakra-ui/react'
 
+import LoginPageBgImage from '../assets/LoginPage.svg';
+
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { fetchData } from '../api';
+import AvarageDailyTicket from '../components/BeginPart/AvarageDailyTicket';
+import AvarageMonthlyTicket from '../components/BeginPart/AvarageMonthlyTicket';
+import RepairProducts from '../components/BeginPart/RepairProducts';
+import StockProducts from '../components/BeginPart/StockProducts';
+import OrdersPlacedMonthly from '../components/BeginPart/OrdersPlacedMonthly';
+import OrdersSoldMonthly from '../components/BeginPart/OrdersSoldMonthly';
 
 const Links = ['Dashboard','Projects','Team'];
+
+const resource =  fetchData();
 
 const NavLink = ( { children } ) => (
   <Link
@@ -42,6 +54,12 @@ const NavLink = ( { children } ) => (
 const Dashboard = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const color = resource;
+
+  console.log(color);
+
+
 
   return (
     <>
@@ -104,14 +122,38 @@ const Dashboard = () => {
 
       </Box>
       
-      <Box as="main" pt={16} w={'100%'}>
-        <Box p={4} bgColor={'tomato'} h={'300px'}>Main Content Here</Box>
-        <Box p={4} bgColor={'dodgerblue'} h={'300px'}>Main Content Here</Box>
-        <Box p={4} bgColor={'lightgreen'} h={'300px'}>Main Content Here</Box>
-        <Box p={4} bgColor={'yellow'} h={'300px'}>Main Content Here</Box>
+      <Flex pt={16} bgImage={LoginPageBgImage}>
+        <Box w={'200px'}>
+          TESTE
+        </Box>
+        <Box as="main" w={'100%'}>
+          <Box p={4} h={'300px'}>
+            <Heading 
+              as='h1' 
+              size='lg' 
+              mt={'45px'}
+              fontSize={'28px'}
+              fontWeight={'bold'}
+              color={'#4E5D66'}
+
+            >
+              Início
+            </Heading>
+            <HStack spacing='32px'>
+              <AvarageDailyTicket data/>
+              <AvarageMonthlyTicket />
+              <RepairProducts/>
+              <StockProducts />
+              <OrdersPlacedMonthly />
+              <OrdersSoldMonthly/>              
+            </HStack>
+          </Box>
+          <Box p={4} h={'300px'}>Main Content Here</Box>
+          <Box p={4} h={'300px'}>Main Content Here</Box>
+          <Box p={4} h={'300px'}>Main Content Here</Box>
       </Box>
-      
-     
+      </Flex> 
+
     </>
   )
 }
