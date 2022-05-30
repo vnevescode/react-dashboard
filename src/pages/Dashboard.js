@@ -20,7 +20,8 @@ import {
 
 } from '@chakra-ui/react'
 
-import LoginPageBgImage from '../assets/LoginPage.svg';
+import DashboardBgImage from '../assets/DashboardPage.svg';
+import {ReactComponent as LogoDashboard } from '../assets/LogoDashboard.svg';
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { fetchData } from '../api';
@@ -30,6 +31,10 @@ import RepairProducts from '../components/BeginPart/RepairProducts';
 import StockProducts from '../components/BeginPart/StockProducts';
 import OrdersPlacedMonthly from '../components/BeginPart/OrdersPlacedMonthly';
 import OrdersSoldMonthly from '../components/BeginPart/OrdersSoldMonthly';
+import OrdersPerMonth from '../components/SalesDashboard/OrdersPerMonth';
+import ExpectedProfitXActualProfit from '../components/SalesDashboard/ExpectedProfitXActualProfit';
+import OrdersPlacedXOrdersCanceled from '../components/SalesDashboard/OrdersPlacedXOrdersCanceled';
+import OrdersByCategory from '../components/SalesDashboard/OrdersByCategory';
 
 const Links = ['Dashboard','Projects','Team'];
 
@@ -63,7 +68,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box as="header" bg={useColorModeValue('gray.100','gray.900')} px={4}  position="fixed" w={'100%'} zIndex={'100'}>
+      <Box as="header" bg={useColorModeValue('gray.100','gray.900')} px={4}  position="fixed" w={'100%'} h={'84px'} zIndex={'100'}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -73,8 +78,8 @@ const Dashboard = () => {
             onClick={isOpen ? onClose : onOpen}
           ></IconButton>
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
-            <HStack
+            <Box><LogoDashboard/></Box>
+            {/* <HStack
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md:'flex'}}
@@ -82,7 +87,7 @@ const Dashboard = () => {
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
-            </HStack>            
+            </HStack>  */}           
           </HStack>
           <Flex alignItems={'center'}>
             <Menu>
@@ -122,7 +127,7 @@ const Dashboard = () => {
 
       </Box>
       
-      <Flex pt={16} bgImage={LoginPageBgImage}>
+      <Flex pt={16} bg={`transparent url(${DashboardBgImage}) 0% 0% no-repeat padding-box`}>
         <Box w={'200px'}>
           TESTE
         </Box>
@@ -148,8 +153,26 @@ const Dashboard = () => {
               <OrdersSoldMonthly/>              
             </HStack>
           </Box>
-          <Box p={4} h={'300px'}>Main Content Here</Box>
-          <Box p={4} h={'300px'}>Main Content Here</Box>
+          <Box p={4} h={'700px'} w={'100%'}>
+              <Heading 
+                as='h1' 
+                size='lg' 
+                mt={'45px'}
+                fontSize={'28px'}
+                fontWeight={'bold'}
+                color={'#5A4CA7'}
+
+              >
+                Dashboard de vendas
+              </Heading>
+              <HStack spacing='32px'>
+                <OrdersPerMonth /> 
+                <ExpectedProfitXActualProfit />  
+                <OrdersPlacedXOrdersCanceled/>
+                <OrdersByCategory/>
+              </HStack>
+          </Box>
+          <Box p={4} h={'500px'} >Main Content Here</Box>
           <Box p={4} h={'300px'}>Main Content Here</Box>
       </Box>
       </Flex> 
