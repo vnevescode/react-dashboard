@@ -20,52 +20,82 @@ const wrapPromise = (promise) => {
 };
 
 // API endpoint 01
-const userInfo = async () => {
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/me");
-}
+const userInfo = "https://628bf017667aea3a3e387e51.mockapi.io/me";
 
 // API endpoint 02
-const dailyAverageTicket = async () => {
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/avg-ticket-day");
+const dailyAverageTicket = "https://628bf017667aea3a3e387e51.mockapi.io/avg-ticket-day";
     
-} 
+ 
 // API endpoint 03
-const monthAverageTicket = async () => {
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/avg-ticket-month");
-}
+const monthAverageTicket = "https://628bf017667aea3a3e387e51.mockapi.io/avg-ticket-month";
 
 //API endpoint 04
-const productsUnderRepair = async () =>{
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/alerts");
-}
+const productsUnderRepair = "https://628bf017667aea3a3e387e51.mockapi.io/alerts";
 
 //API endpoint 05
-const finishingStock = async () =>{
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/alerts");
-}
+const finishingStock = "https://628bf017667aea3a3e387e51.mockapi.io/alerts";
 
 //API endpoint 06
-const ordersPlacedInTheMonth = async () =>{
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/orders-month");
-}
+const ordersPlacedInTheMonth = "https://628bf017667aea3a3e387e51.mockapi.io/orders-month";
 
 //API endpoint 07
-const productsSoldMonth = async () =>{
-    return await axios.get("https://628bf017667aea3a3e387e51.mockapi.io/sells-month");
-}
+const productsSoldMonth = "https://628bf017667aea3a3e387e51.mockapi.io/sells-month";
+
+//API endpoint 08
+const ordersPerMonth = "https://628bf017667aea3a3e387e51.mockapi.io/sells-per-month";
+
+//API endpoint 09
+let sellPerMonthURL = 'https://628bf017667aea3a3e387e51.mockapi.io/sells-per-month';
+let profitPerMonthURL = 'https://628bf017667aea3a3e387e51.mockapi.io/profit-per-month';
 
 
+    /* return await axios.all([sellPerMonthURL,profitPerMonthURL])
+                    .then(axios.spread((...response)=>{
+                        const sellPerMonth = response[0];
+                        const profitPerMonth = response[1];
+                    })).catch( err => {
+                        return err;
+                    })
+} */
 
-
-export const fetchData =  () => {
-    return {
-        userInfo: wrapPromise(userInfo()),
-        dailyAverageTicket: wrapPromise(dailyAverageTicket()),
-        monthAverageTicket: wrapPromise(monthAverageTicket()),
-        productsUnderRepair: wrapPromise(productsUnderRepair()),
-        finishingStock: wrapPromise(finishingStock()),
-        ordersPlacedInTheMonth: wrapPromise(ordersPlacedInTheMonth()),
-        productsSoldMonth: wrapPromise(productsSoldMonth()),
-    }
+//API endpoint 10 
+let orderPerMonthURL = 'https://628bf017667aea3a3e387e51.mockapi.io/orders-per-month';
+let orderCanceledPerMonthURL = 'https://628bf017667aea3a3e387e51.mockapi.io/canceled-orders-per-month';
     
+
+//API endpoint 11
+const tableProducts = "https://628bf017667aea3a3e387e51.mockapi.io/products";
+
+//API endpoint 12
+const ageTransactions = "https://628bf017667aea3a3e387e51.mockapi.io/users-resume";
+
+//API endpoint 13
+const viewProducts = "https://628bf017667aea3a3e387e51.mockapi.io/conversions-resume";
+
+
+const allCalls = [
+    userInfo,
+    dailyAverageTicket,
+    monthAverageTicket,
+    productsUnderRepair,
+    finishingStock,
+    ordersPlacedInTheMonth,
+    productsSoldMonth,
+    ordersPerMonth,
+    sellPerMonthURL,
+    profitPerMonthURL,
+    orderPerMonthURL,
+    orderCanceledPerMonthURL,
+    tableProducts,
+    ageTransactions,
+    viewProducts,
+]
+
+
+export const fetchData = () => {
+    return  axios.all(allCalls.map((endpoint)=> axios.get(endpoint)))
+                .then(( data )=>{                     
+                    return data
+                })    
 }
+

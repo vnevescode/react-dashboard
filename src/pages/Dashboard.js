@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
   Box,
   Flex,
@@ -17,6 +17,18 @@ import {
   Stack,
   Container,
   Heading,
+  InputGroup,
+  Input,
+  InputRightElement,
+  TableContainer,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Tfoot,
+  Text,
 
 } from '@chakra-ui/react'
 
@@ -35,10 +47,22 @@ import OrdersPerMonth from '../components/SalesDashboard/OrdersPerMonth';
 import ExpectedProfitXActualProfit from '../components/SalesDashboard/ExpectedProfitXActualProfit';
 import OrdersPlacedXOrdersCanceled from '../components/SalesDashboard/OrdersPlacedXOrdersCanceled';
 import OrdersByCategory from '../components/SalesDashboard/OrdersByCategory';
+import Sessions from '../components/ConversionFunnel/Sessions';
+import ProductViews from '../components/ConversionFunnel/ProductViews';
+import ConversionProductPage from '../components/ConversionFunnel/ConversionProductPage';
+import AdditionsToCart from '../components/ConversionFunnel/AdditionsToCart';
+import CheckoutShipping from '../components/ConversionFunnel/CheckoutShipping';
+import CheckoutEmail from '../components/ConversionFunnel/CheckoutEmail';
+import CheckoutRegistration from '../components/ConversionFunnel/CheckoutRegistration';
+import CheckoutDelivery from '../components/ConversionFunnel/CheckoutDelivery';
+import CheckoutPayment from '../components/ConversionFunnel/CheckoutPayment';
+import TransactionsByAge from '../components/UserProfile/TransactionsByAge';
+import SessionsByGenre from '../components/UserProfile/SessionsByGenre';
+import TransactionsByCustomerType from '../components/UserProfile/TransactionsByCustomerType';
+import TransactionsByDevice from '../components/UserProfile/TransactionsByDevice';
+import TableProductsList from '../components/TableProducts/TableProductsList';
 
 const Links = ['Dashboard','Projects','Team'];
-
-const resource =  fetchData();
 
 const NavLink = ( { children } ) => (
   <Link
@@ -58,13 +82,28 @@ const NavLink = ( { children } ) => (
 
 const Dashboard = () => {
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
+  
+  const [resource,setResource] = useState('')
+  const [avarageDailyTicketData,setAvarageDailyTicketData] = useState('')
+  const [avarageMonthlyTicketData,setAvarageMonthlyTicketData] = useState('')
+  const [repairProductsData,setRepairProductsData] = useState('')
+  const [stockProductsData,setStockProductsData] = useState('')
+  const [ordersPlacedMonthlyData, setOrdersPlacedMonthlyData] = useState('')
+  const [ordersSoldMonthlyData, setOrdersSoldMonthlyData] = useState('')
 
-  const color = resource;
+  const [ordersPerMonthData,setOrdersPerMonthData] = useState('')
+  const [expectedProfitXActualProfit,setExpectedProfitXActualProfitData] = useState('')
+  const [ordersPlacedXOrdersCanceledData,setOrdersPlacedXOrdersCanceledData] = useState('')
 
-  console.log(color);
-
-
+  useEffect(() =>{
+    fetchData().then((res)=>{
+      setResource(res)
+    })    
+  }
+  ,[]);
+  
+  console.log('resource outside',resource)
 
   return (
     <>
@@ -90,6 +129,7 @@ const Dashboard = () => {
             </HStack>  */}           
           </HStack>
           <Flex alignItems={'center'}>
+            {resource && <Text mr={'10px'}>{resource[0].data.name}</Text>}
             <Menu>
               <MenuButton
                 as={Button}
@@ -98,12 +138,11 @@ const Dashboard = () => {
                 cursor={'pointer'}
                 minW={0}
               >
+                { resource &&
                 <Avatar
                   size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                ></Avatar>
+                  src={resource[0].data.avatar }
+                ></Avatar>}
               </MenuButton>
               <MenuList>
                 <MenuItem>Link 1</MenuItem>
@@ -145,15 +184,15 @@ const Dashboard = () => {
               Início
             </Heading>
             <HStack spacing='32px'>
-              <AvarageDailyTicket data/>
-              <AvarageMonthlyTicket />
-              <RepairProducts/>
-              <StockProducts />
-              <OrdersPlacedMonthly />
-              <OrdersSoldMonthly/>              
+              {resource && <AvarageDailyTicket data={resource[1].data}/>}
+              {resource &&<AvarageMonthlyTicket data={resource[2].data} />}
+              {resource &&<RepairProducts data={resource[3].data}/>}
+              {resource &&<StockProducts data={resource[4].data}/>}
+              {resource &&<OrdersPlacedMonthly data={resource[5].data}/>}
+              {resource &&<OrdersSoldMonthly data={resource[6].data}/>}
             </HStack>
           </Box>
-          <Box p={4} h={'700px'} w={'100%'}>
+          <Box p={4} h={'600px'} w={'100%'}>
               <Heading 
                 as='h1' 
                 size='lg' 
@@ -166,14 +205,59 @@ const Dashboard = () => {
                 Dashboard de vendas
               </Heading>
               <HStack spacing='32px'>
-                <OrdersPerMonth /> 
+                {resource && <OrdersPerMonth data={resource[7].data}/> }
                 <ExpectedProfitXActualProfit />  
                 <OrdersPlacedXOrdersCanceled/>
                 <OrdersByCategory/>
               </HStack>
           </Box>
-          <Box p={4} h={'500px'} >Main Content Here</Box>
-          <Box p={4} h={'300px'}>Main Content Here</Box>
+          <Box p={4} h={'500px'}>
+              <Heading 
+                as='h1' 
+                size='lg' 
+                mt={'45px'}
+                fontSize={'28px'}
+                fontWeight={'bold'}
+                color={'#5A4CA7'}
+
+              >
+                Funil de conversão
+              </Heading>
+              <HStack spacing='32px'>
+                <Sessions/>
+                <ProductViews/>
+                <ConversionProductPage/>
+                <AdditionsToCart/>
+                <CheckoutShipping/>
+                <CheckoutEmail/>
+                <CheckoutRegistration/>
+                <CheckoutDelivery/>
+                <CheckoutPayment/>
+              </HStack>
+          
+          </Box>
+          <Box p={4} h={'500px'}>
+              <Heading 
+                as='h1' 
+                size='lg' 
+                mt={'45px'}
+                fontSize={'28px'}
+                fontWeight={'bold'}
+                color={'#5A4CA7'}
+
+              >
+                Perfil do Usuário
+              </Heading>
+              <HStack spacing='32px'>
+                <TransactionsByAge/>
+                <SessionsByGenre/>
+                <TransactionsByCustomerType/>
+                <TransactionsByDevice/>
+              </HStack>
+          </Box>
+          <Box p={4} h={'1500px'}>
+              <TableProductsList/>
+          </Box>
       </Box>
       </Flex> 
 

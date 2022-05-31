@@ -1,14 +1,15 @@
-import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import React from 'react'
+import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import Chart from 'react-apexcharts';
 
-const OrdersByCategory = () => {
 
-    const series = [11245,32250,20101,25467,25000];
+const TransactionsByDevice = () => {
 
-    const options = {                
-        labels: ["Mesa Eva Laranja","Mesa Eva Rosa","Mesa Eva Azul Escuro","Mesa Eva Azul Claro","Mesa Eva Verde"],
-        colors:['#f1c483','#ec657a','#393c56','#7bb686','#9dd5d3'],
+    const series = [65560.46,106642.86];
+
+    const options = {                        
+        labels: ["Desktop","Mobile"],
+        colors:['#eb657b','#393c56'],
         plotOptions:{
             pie:{
                 expandOnClick:false,
@@ -31,15 +32,24 @@ const OrdersByCategory = () => {
         stroke: { show: false },
         tooltip: {
             style: {
-                fontSize: '25px',                             
+                fontSize: '15px',                             
+            },
+            x: {
+                show: false,
+                format: 'dd MMM',
+                formatter: undefined,
             },            
             y: {
-                formatter: function(value, { series, seriesIndex, dataPointIndex, w }) {                    
-                    return `R$ ${value}`
+                formatter: function(value) { 
+                    const seriesSum =  series[0] + series[1];
+                    return `<div>
+                        <div>${((value/seriesSum) * 100).toFixed(2)}%</div>
+                        <div>${value} transações</div>
+                    </div>`
                 }                
             },        
             
-        }
+        },        
     };
 
   return (
@@ -63,22 +73,9 @@ const OrdersByCategory = () => {
                        letterSpacing={'0px'}
                        opacity={'1'}
                         
-                    >Pedidos por Categorias</Text>
+                    >Transações por aparelho</Text>
                 </Box>
-                <Box>
-                    <Select 
-                        placeholder='Ano' 
-                        variant='filled' 
-                        bg='#F3F5F6' 
-                        color={'#33333340'} 
-                        size='sm'
-                        w='175px'
-                    >
-                        <option value='option1'>2021</option>
-                        <option value='option2'>2022</option>
-                        <option value='option3'>2023</option>
-                    </Select>
-                </Box>
+                
 
             </Flex>
             <Box>                
@@ -94,4 +91,4 @@ const OrdersByCategory = () => {
   )
 }
 
-export default OrdersByCategory
+export default TransactionsByDevice

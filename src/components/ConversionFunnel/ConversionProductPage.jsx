@@ -1,7 +1,7 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 
-const OrdersPlacedMonthly = ({data}) => {
+const ConversionProductPage = () => {
   return (
     <div>
         <Box 
@@ -11,7 +11,8 @@ const OrdersPlacedMonthly = ({data}) => {
             h='168px' 
             bg='#ffffff'            
             pl={'16px'}
-            pt={'25px'}
+            pr={'27px'}
+            pt={'15px'}
             borderRadius={'15px'}
             opacity={'1'}
             mt={'32px'}
@@ -25,13 +26,13 @@ const OrdersPlacedMonthly = ({data}) => {
                 fontWeight={'bold'}
                 lineHeight={'18px'}
                 
-            >Pedidos realizados no mês</Text>
+            >Conversão para a página de produtos</Text>
             <Box 
                 boxShadow={' 0px 0px 20px #0000001A;'} 
                 background={'#FFFFFF 0% 0% no-repeat padding-box'}
                 w={'fit-content'}
                 h='23px' 
-                mt={'12px'}
+                mt={'10px'}
                 borderRadius={'12px'}
                 opacity={'1'}
             >
@@ -44,10 +45,10 @@ const OrdersPlacedMonthly = ({data}) => {
                     fontSize={'12px'}
                     fontWeight={'bold'}
                     p={'5px 11px 5px 7px'}
-                >{`+ ${data.growth}  %`}</Text>
+                >+ 15 %</Text>
             </Box>
              <Text
-                mt={'15px'}                
+                mt={'10px'}                
                 color={'#109E8E'}
                 textAlign={'left'}
                 fontSize={'14px'}
@@ -55,7 +56,7 @@ const OrdersPlacedMonthly = ({data}) => {
                 letterSpacing={'0px'}
                 opacity={'1'}            
             >em relação a julho</Text>             
-            <Flex mt={'18.5px'} >
+            <Flex mt={'15px'} >
                 <Text
                     fontSize={'22px'}
                     lineHeight={'24px'} 
@@ -67,7 +68,7 @@ const OrdersPlacedMonthly = ({data}) => {
                     mr={'12px'}
                     
                     
-                >{data.value}</Text>
+                >40</Text>
                 <Text
                     fontSize={'16px'}
                     color={'#4E5D66'}
@@ -79,7 +80,7 @@ const OrdersPlacedMonthly = ({data}) => {
                     mt={'2.5px'}
                     
                 >
-                    pedidos
+                    %
                 </Text>
             </Flex>
             
@@ -89,4 +90,4 @@ const OrdersPlacedMonthly = ({data}) => {
   )
 }
 
-export default OrdersPlacedMonthly
+export default ConversionProductPage

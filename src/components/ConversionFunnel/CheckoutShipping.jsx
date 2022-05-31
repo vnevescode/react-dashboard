@@ -1,7 +1,7 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 
-const OrdersPlacedMonthly = ({data}) => {
+const CheckoutShipping = () => {
   return (
     <div>
         <Box 
@@ -25,7 +25,7 @@ const OrdersPlacedMonthly = ({data}) => {
                 fontWeight={'bold'}
                 lineHeight={'18px'}
                 
-            >Pedidos realizados no mês</Text>
+            >Checkout - Frete</Text>
             <Box 
                 boxShadow={' 0px 0px 20px #0000001A;'} 
                 background={'#FFFFFF 0% 0% no-repeat padding-box'}
@@ -44,7 +44,7 @@ const OrdersPlacedMonthly = ({data}) => {
                     fontSize={'12px'}
                     fontWeight={'bold'}
                     p={'5px 11px 5px 7px'}
-                >{`+ ${data.growth}  %`}</Text>
+                >+ 15 %</Text>
             </Box>
              <Text
                 mt={'15px'}                
@@ -67,7 +67,7 @@ const OrdersPlacedMonthly = ({data}) => {
                     mr={'12px'}
                     
                     
-                >{data.value}</Text>
+                >10</Text>
                 <Text
                     fontSize={'16px'}
                     color={'#4E5D66'}
@@ -79,7 +79,7 @@ const OrdersPlacedMonthly = ({data}) => {
                     mt={'2.5px'}
                     
                 >
-                    pedidos
+                    usuários
                 </Text>
             </Flex>
             
@@ -89,4 +89,4 @@ const OrdersPlacedMonthly = ({data}) => {
   )
 }
 
-export default OrdersPlacedMonthly
+export default CheckoutShipping
