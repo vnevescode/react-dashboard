@@ -1,7 +1,15 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
-const StockProducts = () => {
+const StockProducts = ({data}) => {
+
+    const todayDate = new Date();
+    const apiDate = new Date(data[1].since);
+
+    const difference = todayDate.getTime() - apiDate.getTime();
+    
+    const days = Math.ceil(difference / (1000 * 3600 * 24));
+
   return (
     <div>
         <Box 
@@ -42,7 +50,7 @@ const StockProducts = () => {
                     fontSize={'12px'}
                     fontWeight={'bold'}
                     p={'5px 11px 5px 7px'}
-                >há 5 dias</Text>
+                >{`há ${days} dias`}</Text>
             </Box>
              <Text
                 mt={'15px'}                
@@ -65,7 +73,7 @@ const StockProducts = () => {
                     mr={'12px'}
                     
                     
-                >10</Text>
+                >{data[1].value}</Text>
                 <Text
                     fontSize={'16px'}
                     color={'#4E5D66'}

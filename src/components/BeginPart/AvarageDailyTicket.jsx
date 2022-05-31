@@ -1,7 +1,8 @@
 import React from 'react'
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 
-const AvarageDailyTicket = () => {
+const AvarageDailyTicket = ( {data} ) => {
+    
   return (
     <div>
         <Box 
@@ -15,6 +16,7 @@ const AvarageDailyTicket = () => {
             opacity={'1'}
             mt={'32px'}
         >
+            
             <Text 
                 textAlign={'left'} 
                 letterSpacing={'0px'} 
@@ -34,7 +36,7 @@ const AvarageDailyTicket = () => {
                 opacity={'1'}
             >
                 <Text 
-                    color={'#109E8E'}
+                    color={data.growth > 0 ? '#109E8E': '#D6628E'}
                     textAlign={'left'}
                     letterSpacing={'0px'}
                     opacity={'1'}
@@ -42,11 +44,11 @@ const AvarageDailyTicket = () => {
                     fontSize={'12px'}
                     fontWeight={'bold'}
                     p={'5px 11px 5px 7px'}
-                >+ 15 %</Text>
+                >{`+ ${data.growth}  %`}</Text>
             </Box>
             <Text
                 mt={'15px'}
-                color={'#109E8E'}
+                color={data.growth > 0 ? '#109E8E': '#D6628E'}
                 textAlign={'left'}
                 fontSize={'14px'}
                 lineHeight={'16px'}
@@ -80,7 +82,7 @@ const AvarageDailyTicket = () => {
                     opacity={'1'}
                     
                     
-                >9.292,00</Text>
+                >{data.value}</Text>
             </Flex>
             
             

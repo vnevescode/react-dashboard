@@ -1,14 +1,16 @@
-import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import React from 'react'
+import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import Chart from 'react-apexcharts';
 
-const OrdersByCategory = () => {
 
-    const series = [11245,32250,20101,25467,25000];
+
+const SessionsByGenre = () => {
+
+    const series = [62780.23,85321.43];
 
     const options = {                
-        labels: ["Mesa Eva Laranja","Mesa Eva Rosa","Mesa Eva Azul Escuro","Mesa Eva Azul Claro","Mesa Eva Verde"],
-        colors:['#f1c483','#ec657a','#393c56','#7bb686','#9dd5d3'],
+        labels: ["Masculino","Feminino"],
+        colors:['#F7C982','#393C56'],
         plotOptions:{
             pie:{
                 expandOnClick:false,
@@ -63,22 +65,9 @@ const OrdersByCategory = () => {
                        letterSpacing={'0px'}
                        opacity={'1'}
                         
-                    >Pedidos por Categorias</Text>
+                    >Sessões por gênero</Text>
                 </Box>
-                <Box>
-                    <Select 
-                        placeholder='Ano' 
-                        variant='filled' 
-                        bg='#F3F5F6' 
-                        color={'#33333340'} 
-                        size='sm'
-                        w='175px'
-                    >
-                        <option value='option1'>2021</option>
-                        <option value='option2'>2022</option>
-                        <option value='option3'>2023</option>
-                    </Select>
-                </Box>
+                
 
             </Flex>
             <Box>                
@@ -94,4 +83,4 @@ const OrdersByCategory = () => {
   )
 }
 
-export default OrdersByCategory
+export default SessionsByGenre

@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
-const OrdersSoldMonthly = () => {
+const OrdersSoldMonthly = ({data}) => {
   return (
     <div>
     <Box 
@@ -44,7 +44,7 @@ const OrdersSoldMonthly = () => {
                 fontSize={'12px'}
                 fontWeight={'bold'}
                 p={'5px 11px 5px 7px'}
-            >+ 15 %</Text>
+            >{`+ ${data.growth}  %`}</Text>
         </Box>
          <Text
             mt={'15px'}                
@@ -67,7 +67,7 @@ const OrdersSoldMonthly = () => {
                 mr={'12px'}
                 
                 
-            >23</Text>
+            >{data.value}</Text>
             <Text
                 fontSize={'16px'}
                 color={'#4E5D66'}

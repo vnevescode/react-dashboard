@@ -1,7 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 
-const AvarageMonthlyTicket = () => {
+const AvarageMonthlyTicket = ( {data} ) => {
+
   return (
     <div>
         <Box 
@@ -34,7 +35,7 @@ const AvarageMonthlyTicket = () => {
                 opacity={'1'}
             >
                 <Text 
-                    color={'#109E8E'}
+                    color={data.growth > 0 ? '#109E8E': '#D6628E'}
                     textAlign={'left'}
                     letterSpacing={'0px'}
                     opacity={'1'}
@@ -42,11 +43,11 @@ const AvarageMonthlyTicket = () => {
                     fontSize={'12px'}
                     fontWeight={'bold'}
                     p={'5px 11px 5px 7px'}
-                >+ 15 %</Text>
+                >{`${data.growth}  %`}</Text>
             </Box>
             <Text
                 mt={'15px'}
-                color={'#109E8E'}
+                color={data.growth > 0 ? '#109E8E': '#D6628E'}
                 textAlign={'left'}
                 fontSize={'14px'}
                 lineHeight={'16px'}
@@ -80,7 +81,7 @@ const AvarageMonthlyTicket = () => {
                     opacity={'1'}
                     
                     
-                >129.292,00</Text>
+                >{data.value}</Text>
             </Flex>
             
             

@@ -1,14 +1,13 @@
 import React from 'react'
+import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import Chart from 'react-apexcharts';
-import { Flex, Box, Text, Select } from '@chakra-ui/react';
 
-const OrdersPerMonth = ({data}) => {
 
-    console.log("data",data)
+const TransactionsByAge = () => {
     const series = [ //data on the y-axis
     {
-        name: "Temperature in Celsius",
-        data: data.map((res)=> res.value),
+        name: "",
+        data: [44, 1200, 1640, 1350, 800, 1020, 200]
     }
     ];
     const options = { //data on the x-axis
@@ -16,7 +15,16 @@ const OrdersPerMonth = ({data}) => {
             id: 'bar-chart'
         },
         xaxis: {
-            categories: ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec'],
+            categories: ['-18','18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+            labels:{
+                formatter: (value) => { return ( value >= 1000 ? (value/1000)+'MIL': value) },
+                style: {                
+                    fontSize: '16px',                
+                    fontWeight: 'bold',
+                    
+                }, 
+            },  
+            
             
         },
         dataLabels: { enabled: false },
@@ -27,22 +35,46 @@ const OrdersPerMonth = ({data}) => {
         },
         plotOptions: {
             bar: {
-            horizontal: false,
+            horizontal: true,
             columnWidth: '40px',  
             borderRadius: 3,
             }
         },    
         labels: {
-            show: false
+            show: true
         },
         yaxis: { 
-            show: false 
-        },
-    };
+            show: true,
+            tooltip: {
+                enabled: false,
+                offsetX: 0,
+            },
+            max: 3000,
+            labels:{
+                style: {                
+                    fontSize: '12px',                
+                    fontWeight: 'bold',
+                    letterSpacing: '0.48px',
+                    lineHeight: '13px',
 
+                }, 
+            },  
+        },
+        tooltip: {
+            style: {
+                fontSize: '20px',                             
+            },            
+            y: {
+                formatter: function(value, { series, seriesIndex, dataPointIndex, w }) {                    
+                    return `${value}`
+                }                
+            },        
+            
+        }
+    };
   return (
     <div>
-        <Box
+         <Box
             background={'#FFFFFF 0% 0% no-repeat padding-box'}
             border={'1px solid #eee'}
             w='608px' 
@@ -63,20 +95,7 @@ const OrdersPerMonth = ({data}) => {
                         
                     >Pedidos do Mês</Text>
                 </Box>
-                <Box>
-                    <Select 
-                        placeholder='Ano' 
-                        variant='filled' 
-                        bg='#F3F5F6' 
-                        color={'#33333340'} 
-                        size='sm'
-                        w='175px'
-                    >
-                        <option value='option1'>2021</option>
-                        <option value='option2'>2022</option>
-                        <option value='option3'>2023</option>
-                    </Select>
-                </Box>
+                
 
             </Flex>
             <Box>                
@@ -92,4 +111,4 @@ const OrdersPerMonth = ({data}) => {
   )
 }
 
-export default OrdersPerMonth
+export default TransactionsByAge
